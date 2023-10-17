@@ -63,7 +63,7 @@ public class Controller implements Initializable {
             "Change Price",
             "Change Location",
             "Change Length",
-            "Change Weight",
+            "Change Width",
             "Change Height",
             "Add Containers",
             "Add Item",
@@ -101,7 +101,7 @@ public class Controller implements Initializable {
                     changeLength(selectedItem);
                     break;
                 case "Change Weight":
-                    changeWeight(selectedItem);
+                    changeWidth(selectedItem);
                     break;
                 case "Change Height":
                     changeHeight(selectedItem);
@@ -172,20 +172,42 @@ public class Controller implements Initializable {
 
     // Implement similar input logic for other functions
 
-    private void changeLength(TreeItem<String> selectedItem) {
-        // Implement length change logic
-        // Example: TextInputDialog for new length
-    }
 
-    private void changeWeight(TreeItem<String> selectedItem) {
-        // Implement weight change logic
-        // Example: TextInputDialog for new weight
-    }
+private void changeDimension(TreeItem<String> selectedItem, String dimension) {
+    // Implement dimension change logic
+    TextInputDialog dialog = new TextInputDialog();
+    dialog.setTitle("Change " + dimension);
+    dialog.setHeaderText("Enter new " + dimension + ":");
+    dialog.setContentText("New " + dimension + ":");
 
-    private void changeHeight(TreeItem<String> selectedItem) {
-        // Implement height change logic
-        // Example: TextInputDialog for new height
-    }
+    Optional<String> result = dialog.showAndWait();
+
+    result.ifPresent(newValue -> {
+        // Check if the input is valid (e.g., it's a number)
+        try {
+            double newDimension = Double.parseDouble(newValue);
+            
+            // Update the selected item's dimension (you should have a data structure to store these values)
+            selectedItem.setValue(dimension + ": " + newDimension);
+            
+            // Perform any other necessary actions, e.g., update the underlying data structure.
+        } catch (NumberFormatException e) {
+            // Handle invalid input (e.g., show an error message).
+        }
+    });
+}
+
+private void changeLength(TreeItem<String> selectedItem) {
+    changeDimension(selectedItem, "Length");
+}
+
+private void changeWidth(TreeItem<String> selectedItem) {
+    changeDimension(selectedItem, "Width");
+}
+
+private void changeHeight(TreeItem<String> selectedItem) {
+    changeDimension(selectedItem, "Height");
+}
 
     private void addContainers(TreeItem<String> selectedItem) {
         TextInputDialog dialog = new TextInputDialog();
