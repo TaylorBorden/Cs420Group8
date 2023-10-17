@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+    <!-- TreeView and ComboBox for interacting with the tree -->
+    <TreeView fx:id="treeView" onMouseClicked="#selectItem" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="8" />
+    <ComboBox fx:id="actionComboBox" promptText="Select Action" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    
+    <!-- Buttons for executing actions -->
+    <Button text="Execute Action" onAction="#performAction" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+</GridPane>
+
