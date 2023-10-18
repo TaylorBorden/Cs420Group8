@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
-    <!-- TreeView and ComboBox for interacting with the tree -->
-    <TreeView fx:id="treeView" onMouseClicked="#selectItem" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="8" />
-    <ComboBox fx:id="actionComboBox" promptText="Select Action" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    
-    <!-- Buttons for executing actions -->
-    <Button text="Execute Action" onAction="#performAction" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-</GridPane>
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <TreeView id="treeView" fx:id="treeView" layoutX="8.0" layoutY="10.0" onMouseClicked="#selectItem" prefHeight="383.0" prefWidth="348.0" />
+      <Button id="button" fx:id="button" layoutX="537.0" layoutY="14.0" mnemonicParsing="false" onAction="#performAction" text="Execute Action" />
+      <ComboBox id="actionComboBox" fx:id="actionComboBox" layoutX="366.0" layoutY="14.0" prefWidth="150.0" />
+      <TextArea id="statusTextArea" layoutX="14.0" layoutY="415.0" prefHeight="200.0" prefWidth="296.0" />
+   </children>
+</AnchorPane>

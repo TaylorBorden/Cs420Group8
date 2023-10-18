@@ -3,6 +3,8 @@ package application;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -16,10 +18,15 @@ public class Controller implements Initializable {
     private TreeView<String> treeView;
     @FXML
     private ComboBox<String> actionComboBox;
+    @FXML
+    private TextArea statusTextArea;
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	
+    	
+
     	// Tree structure
 
     	TreeItem<String> rootItem = new TreeItem<>("Root");
@@ -58,18 +65,13 @@ public class Controller implements Initializable {
 		
 		//combo box with commands
         actionComboBox.getItems().addAll(
-            "Delete Item",
-            "Change Name",
-            "Change Price",
-            "Change Location",
-            "Change Length",
-            "Change Width",
-            "Change Height",
-            "Add Containers",
-            "Add Item",
-            "Delete Containers"
+            "Delete Item", "Change Name", "Change Price", "Change Location", "Change Length", "Change Width", "Change Height", "Add Containers", "Add Item", "Delete Containers"
         );
     }
+    
+
+    
+  
 
     public void selectItem() {
         TreeItem<String> item = treeView.getSelectionModel().getSelectedItem();
@@ -100,7 +102,7 @@ public class Controller implements Initializable {
                 case "Change Length":
                     changeLength(selectedItem);
                     break;
-                case "Change Weight":
+                case "Change Width":
                     changeWidth(selectedItem);
                     break;
                 case "Change Height":
@@ -146,7 +148,11 @@ public class Controller implements Initializable {
         dialog.setContentText("Price:");
 
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(newPrice -> selectedItem.setValue(newPrice));
+
+        result.ifPresent(newPrice -> {
+            String currentValue = selectedItem.getValue();
+            selectedItem.setValue(currentValue + " is " + newPrice);
+        });
     }
 
     private void changeLocation(TreeItem<String> selectedItem) {
@@ -156,46 +162,45 @@ public class Controller implements Initializable {
         xDialog.setContentText("X Coordinate:");
 
         Optional<String> xResult = xDialog.showAndWait();
-        
+
         TextInputDialog yDialog = new TextInputDialog();
         yDialog.setTitle("Change Location - Y");
         yDialog.setHeaderText("Enter the new Y coordinate:");
         yDialog.setContentText("Y Coordinate:");
 
         Optional<String> yResult = yDialog.showAndWait();
-        
+
         if (xResult.isPresent() && yResult.isPresent()) {
+            String currentValue = selectedItem.getValue();
             String newLocation = xResult.get() + ", " + yResult.get();
-            selectedItem.setValue(newLocation);
+            selectedItem.setValue(currentValue + " is " + newLocation);
         }
     }
 
     // Implement similar input logic for other functions
 
+    private void changeDimension(TreeItem<String> selectedItem, String dimension) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Change " + dimension);
+        dialog.setHeaderText("Enter new " + dimension + ":");
+        dialog.setContentText("New " + dimension + ":");
 
-private void changeDimension(TreeItem<String> selectedItem, String dimension) {
-    // Implement dimension change logic
-    TextInputDialog dialog = new TextInputDialog();
-    dialog.setTitle("Change " + dimension);
-    dialog.setHeaderText("Enter new " + dimension + ":");
-    dialog.setContentText("New " + dimension + ":");
+        Optional<String> result = dialog.showAndWait();
 
-    Optional<String> result = dialog.showAndWait();
+        result.ifPresent(newValue -> {
+            String currentValue = selectedItem.getValue();
+            // Check if the input is valid (e.g., it's a number)
+            try {
+                double newDimension = Double.parseDouble(newValue);
+                // Update the selected item's dimension
+                selectedItem.setValue(currentValue + " is " + dimension + ": " + newDimension);
+                // Perform any other necessary actions, e.g., update the underlying data structure.
+            } catch (NumberFormatException e) {
+                // Handle invalid input (e.g., show an error message).
+            }
+        });
+    }
 
-    result.ifPresent(newValue -> {
-        // Check if the input is valid (e.g., it's a number)
-        try {
-            double newDimension = Double.parseDouble(newValue);
-            
-            // Update the selected item's dimension (you should have a data structure to store these values)
-            selectedItem.setValue(dimension + ": " + newDimension);
-            
-            // Perform any other necessary actions, e.g., update the underlying data structure.
-        } catch (NumberFormatException e) {
-            // Handle invalid input (e.g., show an error message).
-        }
-    });
-}
 
 private void changeLength(TreeItem<String> selectedItem) {
     changeDimension(selectedItem, "Length");
