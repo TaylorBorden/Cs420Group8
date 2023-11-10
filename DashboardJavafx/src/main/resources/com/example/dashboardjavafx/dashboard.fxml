@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="628.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dashboardjavafx.DashboardController">
+    <children>
+        <GridPane alignment="center" hgap="10" vgap="10">
+            <!-- TreeView and ComboBox for interacting with the tree -->
+            <TreeView fx:id="treeView" onMouseClicked="#selectItem" GridPane.rowSpan="8" />
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+        <ComboBox fx:id="actionComboBox" layoutX="3.0" layoutY="408.0" promptText="Select Action" />
+
+        <!-- Buttons for executing actions -->
+        <Button layoutX="129.0" layoutY="408.0" onAction="#performAction" text="Execute Action" />
+
+        <!-- Drone Buttons for ANIMATION -->
+        <Button fx:id="startAnimationButton" layoutX="5" layoutY="450" onAction="#goToSelectedItem" text="Start Drone" />
+        <Button fx:id="scanFarmButton" layoutX="100" layoutY="450" onAction="#scanFarmContinuously" text="Scan Farm" />
+        <Button fx:id="droneToBase" layoutX="5" layoutY="490" onAction="#droneToBase" text="Drone to Base" />
+
+        <AnchorPane fx:id="visualPane" layoutX="249.0" layoutY="-2.0" prefHeight="628.0" prefWidth="522.0" />
+    </children>
+</AnchorPane>
