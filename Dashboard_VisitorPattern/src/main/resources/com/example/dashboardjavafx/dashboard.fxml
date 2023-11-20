@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="628.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dashboardjavafx.DashboardController">
+    <children>
+        <GridPane alignment="center" hgap="10" vgap="10">
+            <!-- TreeView and ComboBox for interacting with the tree -->
+            <TreeView fx:id="treeView" onMouseClicked="#selectItem" GridPane.rowSpan="8" />
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+        <ComboBox fx:id="actionComboBox" layoutX="3.0" layoutY="408.0" prefHeight="26.0" prefWidth="113.0" promptText="Select Action" />
+
+        <!-- Buttons for executing actions -->
+        <Button layoutX="129.0" layoutY="408.0" onAction="#performAction" text="Execute Action" />
+
+        <!-- Drone Buttons for ANIMATION -->
+        <Button fx:id="startAnimationButton" layoutX="14.0" layoutY="450.0" onAction="#goToSelectedItem" text="Start Drone" />
+        <Button fx:id="scanFarmButton" layoutX="81.0" layoutY="488.0" onAction="#scanFarmContinuously" text="Scan Farm" />
+
+        <AnchorPane fx:id="visualPane" layoutX="249.0" layoutY="-2.0" prefHeight="628.0" prefWidth="522.0" />
+      <TextArea id="priceArea" fx:id="priceArea" layoutX="14.0" layoutY="562.0" prefHeight="51.0" prefWidth="230.0" />
+        <Button fx:id="droneToBase" layoutX="134.0" layoutY="450.0" onAction="#droneToBase" text="Drone to Base" />
+      <Label layoutX="32.0" layoutY="537.0" prefHeight="18.0" prefWidth="194.0" text="Price and Current Market Value" />
+    </children>
+</AnchorPane>
